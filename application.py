@@ -68,9 +68,15 @@ def channels():
 @app.route("/channel/<channel_id>")
 def get_channel(channel_id):
     channel = filter(lambda c: c.id == channel_id,channels)
-    return render_template('channel',channel=channel)
+    return render_template("channel.html",channel=channel)
 
 def create_channel(channel_name):
-    new_channel = Channel(channel_name)
-    channels.append(new_channel)
-    return redirect(url_for('get_channel', channel=new_channel))
+    error = None
+    if channel_name in channels:
+        error = 'Channel name already exists. Please pick another one.'
+        flash(error)
+        return render_template(url_for('channels'))
+    else:
+        new_channel = Channel(channel_name)
+        channels.append(new_channel)
+        return redirect(url_for('get_channel', channel_id=new_channel.id))
