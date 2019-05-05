@@ -10,6 +10,7 @@ app.config["SECRET_KEY"] = os.urandom(12)
 socketio = SocketIO(app)
 
 nicknames=[]
+channels=[]
 
 @app.route("/")
 def index():
@@ -23,6 +24,17 @@ class User:
     def set_last_channel(self,last_channel):
         self.last_channel = last_channel
         session['last_channel']=last_channel
+
+class Channel:
+    def __init__(self, name):
+        self.name = name
+        self.last_messages=[]
+
+class Message:
+    def __init__(self, nickname, timestamp, message):
+        self.nickname = nickname
+        self.timestamp = timestamp
+        self.message = message
 
 @app.route("/enter", methods=["POST","GET"])
 def enter():
@@ -49,3 +61,7 @@ def channels():
         error='Pick a nickname to start chatting!'
         flash(error)
         return redirect(url_for('enter'))
+
+def create_channel(channel_name):
+    new_channel = Channel(channel_name)
+    channels.append(new_channel)
