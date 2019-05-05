@@ -1,6 +1,16 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+{% extends "layout.html" %}
+
+{% block heading %}  
+{% endblock %}
+
+{% block body %}
+
 <div class="container">
     <form action="{{ url_for('channel') }}" method="POST">
-        <input type="text" class='nickname' name="nickname" placeholder="Enter a nickname">
+        <input type="text" class='new_channel' name="new_channel" placeholder="Enter a name for the new channel">
         <button>Create channel</button>
         {% with errors = get_flashed_messages() %} 
             {% if errors %} 
@@ -11,3 +21,4 @@
         {% endwith %} 
     </form>
   </div>
+  {% endblock %}

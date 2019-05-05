@@ -10,7 +10,7 @@ app.config["SECRET_KEY"] = os.urandom(12)
 socketio = SocketIO(app)
 
 nicknames=[]
-channels=[]
+list_channels=[]
 
 @app.route("/")
 def index():
@@ -65,18 +65,21 @@ def channels():
         flash(error)
         return redirect(url_for('enter'))
 
+@app.route("/channel", methods=["POST"])
+def channel():
+    error = None
+    if request.method == 'POST':
+        channel_name = request.form.get("new_channel")
+        if any(c.name == channel_name for c in list_channels):
+            error = 'Channel name already exists. Please pick another one.'
+            flash(error)
+            return render_template(url_for('channels'))
+        else:
+            new_channel = Channel(channel_name)
+            list_channels.append(new_channel)
+            return redirect(url_for('get_channel', channel_id=new_channel.id))
+
 @app.route("/channel/<channel_id>")
 def get_channel(channel_id):
-    channel = filter(lambda c: c.id == channel_id,channels)
+    chan = filter(lambda c: c.id == channel_id,list_channels)
     return render_template("channel.html",channel=channel)
-
-def create_channel(channel_name):
-    error = None
-    if channel_name in channels:
-        error = 'Channel name already exists. Please pick another one.'
-        flash(error)
-        return render_template(url_for('channels'))
-    else:
-        new_channel = Channel(channel_name)
-        channels.append(new_channel)
-        return redirect(url_for('get_channel', channel_id=new_channel.id))
