@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, request, render_template, redirect, url_for,flash
+from flask import Flask, request, render_template, redirect, url_for,flash, session
 from flask_socketio import SocketIO, emit
 import requests
 
@@ -36,10 +36,16 @@ def enter():
         else:
             new_user = User(nickname)
             nicknames.append(nickname)
-            session["nickname"]=new_user.nickname
+            session['nickname']=new_user.nickname
             return redirect(url_for('channels'))
     return render_template("enter.html")
 
 @app.route("/channels", methods=["GET","POST"])
 def channels():
-    return render_template("channels.html")
+    try:
+        session['nickname']
+        return render_template("channels.html")
+    except KeyError:
+        error='Pick a nickname to start chatting!'
+        flash(error)
+        return redirect(url_for('enter'))
