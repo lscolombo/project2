@@ -5,7 +5,8 @@ from flask_socketio import SocketIO, emit
 import requests
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
+#app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
+app.config["SECRET_KEY"] = os.urandom(12)
 socketio = SocketIO(app)
 
 nicknames=[]
