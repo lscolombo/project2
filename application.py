@@ -81,5 +81,5 @@ def channel():
 
 @app.route("/channel/<channel_id>")
 def get_channel(channel_id):
-    chan = filter(lambda c: c.id == channel_id,list_channels)
-    return render_template("channel.html",channel=channel)
+    chan = list(filter(lambda c: c.id == int(channel_id),list_channels))
+    return render_template("channel.html",channel=chan[0])
