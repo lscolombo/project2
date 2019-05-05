@@ -26,7 +26,10 @@ class User:
         session['last_channel']=last_channel
 
 class Channel:
+    counter = 1
     def __init__(self, name):
+        self.id = Channel.counter
+        Channel.counter += 1
         self.name = name
         self.last_messages=[]
 
@@ -62,6 +65,12 @@ def channels():
         flash(error)
         return redirect(url_for('enter'))
 
+@app.route("/channel/<channel_id>")
+def get_channel(channel_id):
+    channel = filter(lambda c: c.id == channel_id,channels)
+    return render_template('channel',channel=channel)
+
 def create_channel(channel_name):
     new_channel = Channel(channel_name)
     channels.append(new_channel)
+    return redirect(url_for('get_channel', channel=new_channel))
