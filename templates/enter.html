@@ -5,13 +5,7 @@
 
 
 {% block heading %}  
-{% with errors = get_flashed_messages() %} 
-{% if errors %} 
-    {% for error in errors %}
-        {{ error }}
-    {% endfor %} 
-{% endif %} 
-{% endwith %} 
+
 {% endblock %}
 
 
@@ -20,6 +14,13 @@
     <form action="{{ url_for('enter') }}" method="POST">
         <input type="text" class='nickname' name="nickname" placeholder="Enter a nickname">
         <button>Start chatting</button>
+        {% with errors = get_flashed_messages() %} 
+{% if errors %} 
+    {% for error in errors %}
+       <span class='error'>{{ error }}</span> 
+    {% endfor %} 
+{% endif %} 
+{% endwith %} 
     </form>
   </div>
 {% endblock %}
