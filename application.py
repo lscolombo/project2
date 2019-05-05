@@ -19,6 +19,10 @@ class User:
     def __init__(self,nickname):
         self.nickname = nickname
         self.last_channel=None
+    
+    def set_last_channel(self,last_channel):
+        self.last_channel = last_channel
+        session['last_channel']=last_channel
 
 @app.route("/enter", methods=["POST","GET"])
 def enter():
@@ -32,6 +36,7 @@ def enter():
         else:
             new_user = User(nickname)
             nicknames.append(nickname)
+            session["nickname"]=new_user.nickname
             return redirect(url_for('channels'))
     return render_template("enter.html")
 
