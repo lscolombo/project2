@@ -1,0 +1,47 @@
+html, body {
+    height: 100%;
+    margin: 0;
+  }
+  
+  body {
+    align-items: center;
+    background: #59f442;
+    display: flex;
+    font-family: "Lucida Console", Monaco, monospace;
+  }
+  
+  .container {
+    margin: 0 auto;
+    width: 40%;
+}
+  
+
+  form{
+      text-align: center;
+      display: block;
+  }
+
+  input,button{
+      background-color: transparent;
+      font-size: 30px;
+      color: white;
+      border: 0.1px solid white;
+        text-align: center;      
+  }
+
+  input:focus{
+      border: 2px solid white;
+      transition:all 0.3 ease;
+  }
+
+  button{
+      background-color: white;
+      color: #59f442;
+  }
+
+  button:hover{
+    background-color: #59f442;
+    color: white;
+    transition: 0.3s ease;
+  }
+
