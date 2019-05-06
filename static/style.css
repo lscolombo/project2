@@ -26,7 +26,7 @@ html, body {
       font-size: 30px;
       color: white;
       border: 0.1px solid white;
-        text-align: center;      
+      text-align: center;      
   }
 
   input:focus{
@@ -48,4 +48,73 @@ html, body {
 .error{
     margin-top: 10px;
     color: red;
+}
+
+.col-md-4 {
+  background-color: white;
+  color: #59f442;  
+}
+
+.col-md-8 {
+  background-color: #59f442;
+  color: white;
+}
+
+.row.custom:last-child{
+  height: 90%;
+}
+
+
+.row.custom:first-child{
+  height: 10%;
+  align-content: center;
+  align-items: center;
+}
+
+.container-fluid{
+  height: 100%;
+  overflow: auto;
+}
+
+.title_create, .title_join{
+  font-size: 34px;
+  font-weight: bold;
+  margin-top: 50px;
+}
+
+.title_create{
+  color: #59f442;
+}
+
+.title_join{
+  color: white;
+}
+
+
+.new-channel{
+  border: 0.1px solid #59f442;
+  font-size: 18px;
+  height: 50px;
+  width: 65%;
+  color: #59f442;
+  display: block;
+}
+
+.new-channel:focus{
+  border: 2px solid #59f442;
+  transition:all 0.3 ease;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+}
+.grid-item {
+  border: 10px solid #59f442;
+  background-color: white ;
+  color: #59f442;
+  padding: 20px;
+  font-size: 20px;
+  text-align: center;
 }

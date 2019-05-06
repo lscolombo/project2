@@ -10,7 +10,7 @@ app.config["SECRET_KEY"] = os.urandom(12)
 socketio = SocketIO(app)
 
 nicknames=[]
-list_channels=[]
+#list_channels=[]
 
 @app.route("/")
 def index():
@@ -32,6 +32,8 @@ class Channel:
         Channel.counter += 1
         self.name = name
         self.last_messages=[]
+
+list_channels=[Channel('Hola'),Channel('Chau'),Channel('Nombre re largo'),Channel('H'),Channel('12345678912345678912346'),Channel('asdfghjklzxcvbn')]
 
 class Message:
     def __init__(self, nickname, timestamp, message):
@@ -59,7 +61,7 @@ def enter():
 def channels():
     try:
         session['nickname']
-        return render_template("channels.html")
+        return render_template("channels.html", channels=list_channels)
     except KeyError:
         error='Pick a nickname to start chatting!'
         flash(error)
@@ -69,11 +71,11 @@ def channels():
 def channel():
     error = None
     if request.method == 'POST':
-        channel_name = request.form.get("new_channel")
+        channel_name = request.form.get("new-channel")
         if any(c.name == channel_name for c in list_channels):
             error = 'Channel name already exists. Please pick another one.'
             flash(error)
-            return render_template(url_for('channels'))
+            return render_template("channels.html", channels = list_channels)
         else:
             new_channel = Channel(channel_name)
             list_channels.append(new_channel)

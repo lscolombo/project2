@@ -1,24 +1,52 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
 {% extends "layout.html" %}
 
-{% block heading %}  
+{% block heading %}
 {% endblock %}
 
 {% block body %}
 
-<div class="container">
-    <form action="{{ url_for('channel') }}" method="POST">
-        <input type="text" class='new_channel' name="new_channel" placeholder="Enter a name for the new channel">
-        <button>Create channel</button>
-        {% with errors = get_flashed_messages() %} 
-            {% if errors %} 
-                {% for error in errors %}
-                    <span class='error'>{{ error }}</span> 
-                {% endfor %} 
-            {% endif %} 
-        {% endwith %} 
-    </form>
-  </div>
-  {% endblock %}
+<div class="container-fluid">
+        <div class="row custom">
+                <div class="col-md-4 text-md-center">
+                        <h1 class="title_create">Create your own channel ...</h1>
+                </div>
+                <div class="col-md-8">
+                        <h1 class="title_join">... or join an existing one!</h1>
+                </div>
+        </div>
+    <div class="row custom">
+            <div class="col-md-4 text-md-center">
+
+        <form action="{{ url_for('channel') }}" method="POST">
+            <input type="text" class="new-channel" name="new-channel" maxlength="35" placeholder="Enter a name for the new channel">
+            <button>Create channel</button>
+            {% with errors = get_flashed_messages() %}
+            {% if errors %}
+            {% for error in errors %}
+            <span class='error'>{{ error }}</span>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+        </form>
+    </div>
+
+    <div class="col-md-8">
+        {% if channels %}
+        <div class="grid-container">
+            {% for channel in channels %}
+            <div class="grid-item">{{ channel.name }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+ </div>
+
+
+
+</div>
+{% endblock %}
