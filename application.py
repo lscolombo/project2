@@ -85,3 +85,9 @@ def channel():
 def get_channel(channel_id):
     chan = list(filter(lambda c: c.id == int(channel_id),list_channels))
     return render_template("channel.html",channel=chan[0])
+
+@socketio.on("submit message")
+def message(data):
+    msg = data["message"]
+    emit("announce message", {"message": msg}, broadcast=True, include_self=True)
+

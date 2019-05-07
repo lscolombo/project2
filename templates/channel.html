@@ -5,12 +5,21 @@
 {% extends "layout.html" %}
 
 {% block heading %}
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+<script src="{{ url_for('static', filename='channel.js') }}"></script>
+
 {% endblock %}
 
 {% block body %}
 Hola
 {{ channel.id }}
-<ul>{{channel.id}}</ul>
+<ul id="conversation">
+<li>pruebitaa</li>
+</ul>
+<form id="form" data-id=1>
+    <input type=text id="message">
+    <button id="submit-button">Submit</button>
+</form>
 
 {{ channel.name }}
 

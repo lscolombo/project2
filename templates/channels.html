@@ -38,7 +38,11 @@
         {% if channels %}
         <div class="grid-container">
             {% for channel in channels %}
-            <div class="grid-item">{{ channel.name }}</div>
+            <div class="grid-item">
+                <a href="{{ url_for('get_channel',channel_id=channel.id) }}">
+                    {{ channel.name }}
+                </a>
+            </div>
             {% endfor %}
         </div>
         {% endif %}
