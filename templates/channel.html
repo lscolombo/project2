@@ -16,9 +16,11 @@ Hola
 
 
 <ul id="conversation">
-    <li>Hola</li>
-    <li>Hola2</li>
-    <li>Hola3</li>
+
+{% for message in channel.last_messages %}
+    <li> {{ message }} </li>
+{% endfor %}
+
 </ul>
 
 

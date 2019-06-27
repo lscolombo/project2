@@ -85,14 +85,17 @@ def channel():
 
 @app.route("/channel/<channel_id>")
 def get_channel(channel_id):
-    chan = list(filter(lambda c: c.id == int(channel_id),list_channels))
-    session['active_channel'] = chan
-    return render_template("channel.html",channel=chan[0])
+    active_channel=get_channel_by_id(channel_id)
+    session['active_channel'] = active_channel.id
+    return render_template("channel.html",channel=active_channel)
+
+def get_channel_by_id(channel_id):
+    return(list(filter(lambda c: c.id == int(channel_id),list_channels))[0])
 
 @socketio.on("submit message")
 def message(data):
-    session['active_channel'].last_messages.add(data.message)
-    print('ESTO ES PYTHON')
+    channel = get_channel_by_id(session['active_channel'])
+    channel.last_messages.append(data['message'])
     emit("announce", data, broadcast=True, include_self=True)
 
 
