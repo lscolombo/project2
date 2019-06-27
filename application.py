@@ -14,7 +14,9 @@ nicknames=[]
 
 @app.route("/")
 def index():
-    return "Project 2: TODO"
+    #return "Project 2: TODO"
+    return render_template("layout.html")
+
 
 class User:
     def __init__(self,nickname):
@@ -84,10 +86,15 @@ def channel():
 @app.route("/channel/<channel_id>")
 def get_channel(channel_id):
     chan = list(filter(lambda c: c.id == int(channel_id),list_channels))
+    session['active_channel'] = chan
     return render_template("channel.html",channel=chan[0])
 
 @socketio.on("submit message")
 def message(data):
-    msg = data["message"]
-    emit("announce message", {"message": msg}, broadcast=True, include_self=True)
+    session['active_channel'].last_messages.add(data.message)
+    print('ESTO ES PYTHON')
+    emit("announce", data, broadcast=True, include_self=True)
 
+
+if __name__ == '__main__':
+    socketio.run(app)
