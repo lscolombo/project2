@@ -3,6 +3,7 @@ import os
 from flask import Flask, request, render_template, redirect, url_for,flash, session
 from flask_socketio import SocketIO, emit
 import requests
+import collections
 
 app = Flask(__name__)
 #app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
@@ -33,7 +34,14 @@ class Channel:
         self.id = Channel.counter
         Channel.counter += 1
         self.name = name
-        self.last_messages=[]
+        self.last_messages=collections.deque(maxlen=100)
+
+    def add_message(self, message):
+        if len(self.last_messages) < 100:
+            self.last_messages.append(message)
+        else:
+            self.last_messages.popleft()
+            self.last_messages.append(message)
 
 list_channels=[Channel('Hola'),Channel('Chau'),Channel('Nombre re largo'),Channel('H'),Channel('12345678912345678912346'),Channel('asdfghjklzxcvbn')]
 
@@ -95,7 +103,7 @@ def get_channel_by_id(channel_id):
 @socketio.on("submit message")
 def message(data):
     channel = get_channel_by_id(session['active_channel'])
-    channel.last_messages.append(data['message'])
+    channel.add_message(data['message'])
     emit("announce", data, broadcast=True, include_self=True)
 
 
