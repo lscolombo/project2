@@ -4,6 +4,8 @@ from flask import Flask, request, render_template, redirect, url_for,flash, sess
 from flask_socketio import SocketIO, emit
 import requests
 import collections
+from datetime import datetime
+import json
 
 app = Flask(__name__)
 #app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
@@ -103,8 +105,10 @@ def get_channel_by_id(channel_id):
 @socketio.on("submit message")
 def message(data):
     channel = get_channel_by_id(session['active_channel'])
-    channel.add_message(data['message'])
-    emit("announce", data, broadcast=True, include_self=True)
+    message = Message(session['nickname'],str(datetime.now()),data['message'])
+    message_json = json.dumps(message, default=lambda x: x.__dict__)
+    channel.add_message(message)
+    emit("announce", message_json, broadcast=True, include_self=True)
 
 
 if __name__ == '__main__':
