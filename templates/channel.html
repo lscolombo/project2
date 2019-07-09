@@ -16,9 +16,15 @@ Hola
 
 
 <ul id="conversation">
+    
 
-{% for message in channel.last_messages %}
-    <li> {{ message.nickname }} {{ message.message }} {{ message.timestamp }}</li>
+{% for mes in channel.last_messages %}
+<li>
+    <span id="timestamp">[{{mes.timestamp}}]</span>
+    <span id="nickname">{{mes.nickname}}</span>
+    <span id="content">{{mes.message}}</span>
+</li>
+
 {% endfor %}
 
 </ul>

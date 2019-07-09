@@ -119,6 +119,13 @@ html, body {
   text-align: center;
 }
 
+#nickname{
+  font-weight: bold;
+}
+
+#timestamp{
+  font-style: italic;
+}
 
 
 

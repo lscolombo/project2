@@ -6,6 +6,7 @@ import requests
 import collections
 from datetime import datetime
 import json
+import random
 
 app = Flask(__name__)
 #app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
@@ -13,6 +14,7 @@ app.config["SECRET_KEY"] = os.urandom(12)
 socketio = SocketIO(app)
 
 nicknames=[]
+users=[]
 #list_channels=[]
 
 @app.route("/")
@@ -25,6 +27,7 @@ class User:
     def __init__(self,nickname):
         self.nickname = nickname
         self.last_channel=None
+        self.color = "#{:06x}".format(random.randint(0, 0xFFFFFF))
     
     def set_last_channel(self,last_channel):
         self.last_channel = last_channel
@@ -53,6 +56,9 @@ class Message:
         self.timestamp = timestamp
         self.message = message
 
+    def to_json(self):
+        return({"nickname": self.nickname, "timestamp": self.timestamp, "message": self.message})
+
 @app.route("/enter", methods=["POST","GET"])
 def enter():
     error=None
@@ -65,6 +71,8 @@ def enter():
         else:
             new_user = User(nickname)
             nicknames.append(nickname)
+            users.append(new_user)
+            print(get_user_by_nickname(new_user.nickname).color)
             session['nickname']=new_user.nickname
             return redirect(url_for('channels'))
     return render_template("enter.html")
@@ -97,18 +105,24 @@ def channel():
 def get_channel(channel_id):
     active_channel=get_channel_by_id(channel_id)
     session['active_channel'] = active_channel.id
-    return render_template("channel.html",channel=active_channel)
+    user = get_user_by_nickname(session['nickname'])
+    return render_template("channel.html",channel=active_channel, color=user.color)
 
 def get_channel_by_id(channel_id):
     return(list(filter(lambda c: c.id == int(channel_id),list_channels))[0])
 
+def get_user_by_nickname(nickname):
+    return(list(filter(lambda u: u.nickname == nickname, users))[0])
+
 @socketio.on("submit message")
 def message(data):
     channel = get_channel_by_id(session['active_channel'])
-    message = Message(session['nickname'],str(datetime.now()),data['message'])
+    message = Message(session['nickname'],datetime.now().strftime("%H:%M:%S"),data['message'])
     message_json = json.dumps(message, default=lambda x: x.__dict__)
-    channel.add_message(message)
-    emit("announce", message_json, broadcast=True, include_self=True)
+    msg = message.to_json()
+    channel.add_message(msg)
+    print(channel.last_messages)
+    emit("announce", msg, broadcast=True, include_self=True)
 
 
 if __name__ == '__main__':

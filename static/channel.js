@@ -3,6 +3,10 @@ document.addEventListener('DOMContentLoaded', () => {
     var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
 
     var input = document.querySelector('#message');
+
+    function initializeConversation(previousMessages){
+        previousMessages.forEach(formatMessage);
+    }
     
     input.addEventListener("keyup", function(event) {
         if (event.keyCode == 13) {
@@ -21,11 +25,33 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     socket.on('announce', data => {
-        console.log('holache:','holache');
-        const li = document.createElement('li');
-        li.innerHTML = data.message;
-        document.querySelector('#conversation').append(li);
+        displayMessage(data);
     });
 
+
+    function displayMessage(data){
+        const message = document.createElement('li');
+
+        const timestamp = document.createElement('span');
+        timestamp.id = 'timestamp';
+        message.appendChild(timestamp);
+
+        const nickname = document.createElement('span');
+        nickname.id = 'nickname';
+        message.appendChild(nickname);
+
+        const content = document.createElement('span');
+        content.id = 'content';
+        message.appendChild(content);
+
+        timestamp.textContent = '[' + data.timestamp + '] ';
+        nickname.textContent = data.nickname;
+        content.textContent = " " + data.message;
+
+        document.querySelector('#conversation').append(message);
+    }
+
 });
+
+
 
