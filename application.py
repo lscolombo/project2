@@ -35,10 +35,11 @@ class User:
 
 class Channel:
     counter = 1
-    def __init__(self, name):
+    def __init__(self, name, password=None):
         self.id = Channel.counter
         Channel.counter += 1
         self.name = name
+        self.password = password
         self.last_messages=collections.deque(maxlen=100)
 
     def add_message(self, message):
