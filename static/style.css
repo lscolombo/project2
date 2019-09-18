@@ -126,7 +126,10 @@ html, body {
 .grid-item1{
   grid-column: 1;
   grid-row: 1 / 3;
+  background: black;
 }
+
+
 
 #nickname{
   font-weight: bold;

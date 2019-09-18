@@ -55,11 +55,13 @@
             {% if channels %}
             <div class="grid-container">
                 <div class="grid-item1">
-                    <form>
+                    <form action="{{ url_for('get_secret_channel') }}" method="POST">
+                        <h4>Enter a secret channel:</h4>
                         <label for="secret_channel"><b>Channel name</b></label>
                         <input type="text" id="none" name="secret_channel">
                         <label for="psw"><b>Password</b></label>
                         <input type="password" id="none" name="psw">
+                        <button>Submit</button>
                     </form>
                 </div>
                 {% for channel in channels %}
