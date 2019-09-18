@@ -82,7 +82,7 @@ def enter():
 def channels():
     try:
         session['nickname']
-        return render_template("channels.html", channels=list_channels)
+        return render_template("channels.html", channels=filter(lambda channel : channel.password is None,list_channels))
     except KeyError:
         error='Pick a nickname to start chatting!'
         flash(error)
@@ -93,12 +93,13 @@ def channel():
     error = None
     if request.method == 'POST':
         channel_name = request.form.get("new-channel")
+        password = request.form.get("psw")
         if any(c.name == channel_name for c in list_channels):
             error = 'Channel name already exists. Please pick another one.'
             flash(error)
             return render_template("channels.html", channels = list_channels)
         else:
-            new_channel = Channel(channel_name)
+            new_channel = Channel(channel_name, password)
             list_channels.append(new_channel)
             return redirect(url_for('get_channel', channel_id=new_channel.id))
 
