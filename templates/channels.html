@@ -37,10 +37,10 @@
                 </div>
                 <div class="row" style="position: fixed; bottom: 0;">
                     <div class="container center_div">
-                        <form action="/action_page.php" id="form-custom">
+                        <form action="{{ url_for('channel') }}" method="POST" id="form-custom">
                             <h1 class="title_secret">Create a secret channel:</h1>
                             <label for="secret"><b>Password</b></label>
-                            <input type="text" class="new-channel" placeholder="Channel name" name="secret" required>
+                            <input type="text" class="new-channel" placeholder="Channel name" name="new-channel" required>
                         
                             <label for="psw"><b>Password</b></label>
                             <input type="password" class="new-channel" placeholder="Enter Password" name="psw" required>
@@ -54,6 +54,14 @@
         <div class="col-md-8">
             {% if channels %}
             <div class="grid-container">
+                <div class="grid-item1">
+                    <form>
+                        <label for="secret_channel"><b>Channel name</b></label>
+                        <input type="text" id="none" name="secret_channel">
+                        <label for="psw"><b>Password</b></label>
+                        <input type="password" id="none" name="psw">
+                    </form>
+                </div>
                 {% for channel in channels %}
                 <div class="grid-item">
                     <a href="{{ url_for('get_channel',channel_id=channel.id) }}">
