@@ -110,6 +110,21 @@ def get_channel(channel_id):
     user = get_user_by_nickname(session['nickname'])
     return render_template("channel.html",channel=active_channel, color=user.color)
 
+@app.route("/secchannel", methods=["POST"])
+def get_secret_channel():
+    error=None
+    if request.method == 'POST':
+        channel_name = request.form.get("secret_channel")
+        password = request.form.get("psw")
+        matching_channels = list(filter(lambda channel: channel.name == channel_name and channel.password == password, list_channels))
+    if len(matching_channels) != 0:
+        secret_channel_id = matching_channels[0].id
+        print(secret_channel_id)
+        print(matching_channels[0].name)
+    return redirect(url_for('get_channel', channel_id=secret_channel_id))
+
+        
+
 def get_channel_by_id(channel_id):
     return(list(filter(lambda c: c.id == int(channel_id),list_channels))[0])
 
