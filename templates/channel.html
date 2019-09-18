@@ -15,29 +15,43 @@ Hola
 {{ channel.id }}
 
 
-<ul id="conversation">
-    
+<div class="container-fluid" id="container-chat">
+    <div class="row">
 
-{% for mes in channel.last_messages %}
-<li>
-    <span id="timestamp">[{{mes.timestamp}}]</span>
-    <span id="nickname">{{mes.nickname}}</span>
-    <span id="content">{{mes.message}}</span>
-</li>
+        <div class="col-md-12" id="chat">
+            <ul id="conversation">
+                {% for mes in channel.last_messages %}
+                <li>
+                    <span id="timestamp">[{{mes.timestamp}}]</span>
+                    <span id="nickname">{{mes.nickname}}</span>
+                    <span id="content">{{mes.message}}</span>
+                </li>
 
-{% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
 
-</ul>
+    </div>
+    <div class="row">
+
+        <div class="col-md-12" id="chat">
+            <div class="input-group">
+                    <input type=text id="message">
+                    <button id="submit-button">Submit</button>
+            </div>
+        </div>
+
+    </div>
+
+    <ul id="conversation">
 
 
-<input type=text id="message">
-<button id="submit-button">Submit</button>
 
 
 
 
 
-{{ channel.name }}
+        {{ channel.name }}
 
 
-{% endblock %}
+        {% endblock %}

@@ -9,11 +9,7 @@ html, body {
     display: flex;
     font-family: "Lucida Console", Monaco, monospace;
   }
-  
-  .container {
-    margin: 0 auto;
-    width: 40%;
-}
+
   
 
   form{
@@ -26,7 +22,7 @@ html, body {
       font-size: 30px;
       color: white;
       border: 0.1px solid white;
-      text-align: center;      
+      text-align: center;     
   }
 
   input:focus{
@@ -66,7 +62,7 @@ html, body {
 
 
 .row.custom:first-child{
-  height: 10%;
+  height: 10%;"col-md-4"
   align-content: center;
   align-items: center;
 }
@@ -76,7 +72,7 @@ html, body {
   overflow: auto;
 }
 
-.title_create, .title_join{
+.title_create, .title_join, .title_secret{
   font-size: 34px;
   font-weight: bold;
   margin-top: 50px;
@@ -88,6 +84,11 @@ html, body {
 
 .title_join{
   color: white;
+}
+
+.title_secret{
+  color: black;
+  text-shadow: 1cm;
 }
 
 
@@ -127,13 +128,35 @@ html, body {
   font-style: italic;
 }
 
+#chat{
+  background-color: lemonchiffon;
+}
 
+#container-chat{
+  margin:0 auto;
+  width:50%;
+}
 
+#submit-button, #message{
+  font-size:18px;
+}
 
+#submit-button{
+  width:30%;
+}
 
+#message{
+  width:70%;
+  color:black;
+}
 
+.center_div{
+  margin: 0 auto;
+  width:80% /* value of your choice which suits your alignment */
+}
 
+#form-custom{
 
-
+}
 
 
