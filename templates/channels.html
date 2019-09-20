@@ -21,33 +21,37 @@
     <div class="row custom">
         <div class="col-md-4 text-md-center">
                 <div class="row">
-                    <div class="container center_div">
-                    <form action="{{ url_for('channel') }}" method="POST" id="form-custom">
-                        <input type="text" class="new-channel" name="new-channel" maxlength="35" placeholder="Enter a name for the new channel">
-                        <button>Create channel</button>
-                        {% with errors = get_flashed_messages() %}
-                        {% if errors %}
-                        {% for error in errors %}
-                        <span class='error'>{{ error }}</span>
-                        {% endfor %}
-                        {% endif %}
-                        {% endwith %}
-                    </form>
+                    <div class="col-md-12 text-md-center" id="col-new-channel">
+                        <div class="container center_div">
+                        <form action="{{ url_for('channel') }}" method="POST" id="form-custom">
+                            <input type="text" class="new-channel" name="new-channel" maxlength="35" placeholder="Enter a name for the new channel">
+                            <button>Create channel</button>
+                            {% with errors = get_flashed_messages() %}
+                            {% if errors %}
+                            {% for error in errors %}
+                            <span class='error'>{{ error }}</span>
+                            {% endfor %}
+                            {% endif %}
+                            {% endwith %}
+                        </form>
+                        </div>
                     </div>
                 </div>
-                <div class="row" style="position: fixed; bottom: 0;">
-                    <div class="container center_div">
-                        <form action="{{ url_for('channel') }}" method="POST" id="form-custom">
-                            <h1 class="title_secret">Create a secret channel:</h1>
-                            <label for="secret"><b>Password</b></label>
-                            <input type="text" class="new-channel" placeholder="Channel name" name="new-channel" required>
-                        
-                            <label for="psw"><b>Password</b></label>
-                            <input type="password" class="new-channel" placeholder="Enter Password" name="psw" required>
-                        
-                            <button>Create channel</button>
-                        </form>
-                    </div> 
+                <div class="row" id="row-secret">
+                    <div class="col-md-12 text-md-center" id="col-secret">
+                        <div class="container center_div">
+                            <form action="{{ url_for('channel') }}" method="POST" id="form-custom">
+                                <h1 class="title_secret">Create a secret channel:</h1>
+                                <label for="secret"><b>Password</b></label>
+                                <input type="text" class="new-channel" placeholder="Channel name" name="new-channel" required>
+                            
+                                <label for="psw"><b>Password</b></label>
+                                <input type="password" class="new-channel" placeholder="Enter Password" name="psw" required>
+                            
+                                <button>Create channel</button>
+                            </form>
+                        </div> 
+                    </div>
                 </div> 
         </div>
 
