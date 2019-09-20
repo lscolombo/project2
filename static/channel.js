@@ -49,6 +49,13 @@ document.addEventListener('DOMContentLoaded', () => {
         content.textContent = " " + data.message;
 
         document.querySelector('#conversation').append(message);
+
+        updateScroll();
+    }
+
+    function updateScroll(){
+        var element = document.getElementById("mesgs");
+        element.scrollTop = element.scrollHeight;
     }
 
 });
