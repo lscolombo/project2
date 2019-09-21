@@ -1,10 +1,14 @@
+body{
+    font-family: "Lucida Console", Monaco, monospace;
+}
+
 .container{max-width:1170px; margin:auto;}
 img{ max-width:100%;}
 .inbox_people {
   background: #f8f8f8 none repeat scroll 0 0;
   float: left;
   overflow: hidden;
-  width: 40%; border-right:1px solid #c4c4c4;
+  width: 25%; border-right:1px solid #c4c4c4;
 }
 .inbox_msg {
   border: 1px solid #c4c4c4;
@@ -56,7 +60,7 @@ img{ max-width:100%;}
   margin: 0;
   padding: 18px 16px 10px;
 }
-.inbox_chat { height: 100%; overflow-y: scroll;}
+.inbox_chat { height: 75%; overflow-y: scroll;}
 
 .active_chat{ background:#ebebeb;}
 
@@ -89,8 +93,8 @@ img{ max-width:100%;}
 .mesgs {
   float: left;
   padding: 30px 15px 0 25px;
-  width: 60%;
-  height: 100%;
+  width: 75%;
+  height: 75%;
   overflow-y: scroll;
 }
 
@@ -113,7 +117,7 @@ img{ max-width:100%;}
   color: #4c4c4c;
   font-size: 15px;
   min-height: 48px;
-  width: 100%;
+  width: 80%;
 }
 
 .type_msg {border-top: 1px solid #c4c4c4;position: relative;}
@@ -130,8 +134,20 @@ img{ max-width:100%;}
   top: 11px;
   width: 33px;
 }
-.messaging { padding: 0 0 50px 0;}
-.msg_history {
-  height: 516px;
-  overflow-y: auto;
+.messaging { padding: 0 0 0 0;}
+
+button{
+    width: 20%;
+    background-color: black;
+    color: white;
+}
+
+button:hover{
+    transition: 0.3s ease;
+    background-color: white;
+    color: black;
+}
+
+li{
+    list-style: none;
 }

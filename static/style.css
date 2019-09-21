@@ -61,12 +61,6 @@ html, body {
 }
 
 
-.row.custom:first-child{
-  height: 10%;"col-md-4"
-  align-content: center;
-  align-items: center;
-}
-
 .container-fluid{
   height: 100%;
   overflow: auto;
