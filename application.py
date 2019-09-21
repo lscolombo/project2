@@ -52,13 +52,14 @@ class Channel:
 list_channels=[Channel('Hola'),Channel('Chau'),Channel('Nombre re largo'),Channel('H'),Channel('12345678912345678912346'),Channel('asdfghjklzxcvbn')]
 
 class Message:
-    def __init__(self, nickname, timestamp, message):
+    def __init__(self, nickname, timestamp, message, color):
         self.nickname = nickname
         self.timestamp = timestamp
         self.message = message
+        self.color = color
 
     def to_json(self):
-        return({"nickname": self.nickname, "timestamp": self.timestamp, "message": self.message})
+        return({"nickname": self.nickname, "timestamp": self.timestamp, "message": self.message, "color": self.color})
 
 @app.route("/enter", methods=["POST","GET"])
 def enter():
@@ -133,8 +134,10 @@ def get_user_by_nickname(nickname):
 
 @socketio.on("submit message")
 def message(data):
+    print(data['message'])
+    print(data['color'])
     channel = get_channel_by_id(session['active_channel'])
-    message = Message(session['nickname'],datetime.now().strftime("%H:%M:%S"),data['message'])
+    message = Message(session['nickname'],datetime.now().strftime("%H:%M:%S"),data['message'], data['color'])
     message_json = json.dumps(message, default=lambda x: x.__dict__)
     msg = message.to_json()
     channel.add_message(msg)

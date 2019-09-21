@@ -18,8 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.querySelector('#submit-button').onclick = () => {
             var message = document.querySelector('#message').value;
+            const color = document.querySelector('#message').getAttribute('color');
             document.querySelector('#message').value = "";
-            socket.emit('submit message',{'message': message});
+            socket.emit('submit message',{'message': message, 'color': color});
       };
 
     });
@@ -31,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function displayMessage(data){
         const message = document.createElement('li');
+        message.style.color = data.color;
 
         const timestamp = document.createElement('span');
         timestamp.id = 'timestamp';
@@ -46,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         timestamp.textContent = '[' + data.timestamp + '] ';
         nickname.textContent = data.nickname;
-        content.textContent = " " + data.message;
+        content.textContent = ": " + data.message;
 
         document.querySelector('#conversation').append(message);
 
