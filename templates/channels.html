@@ -20,7 +20,7 @@
                         <h1 class="title_create">Create your own channel ...</h1>
                         <div class="container center_div">
                         <form action="{{ url_for('channel') }}" method="POST" id="form-custom">
-                            <input type="text" class="new-channel" name="new-channel" maxlength="35" placeholder="Enter a name for the new channel">
+                            <input type="text" class="new-channel" name="new-channel" maxlength="31" placeholder="Enter a name for the new channel">
                             <button class="btn-channels">Create channel</button>
                             {% with errors = get_flashed_messages() %}
                             {% if errors %}
