@@ -1,6 +1,8 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<script src="{{ url_for('static', filename='channels.js') }}"></script>
+
 
 {% extends "layout.html" %}
 
@@ -10,26 +12,20 @@
 {% block body %}
 
 <div class="container-fluid">
-    <div class="row custom">
-            <div class="col-md-4 text-md-center">
-                    <h1 class="title_create">Create your own channel ...</h1>
-            </div>
-            <div class="col-md-8">
-                    <h1 class="title_join">... or join an existing one!</h1>
-            </div>
-    </div>
+
     <div class="row custom">
         <div class="col-md-4 text-md-center">
                 <div class="row">
                     <div class="col-md-12 text-md-center" id="col-new-channel">
+                        <h1 class="title_create">Create your own channel ...</h1>
                         <div class="container center_div">
                         <form action="{{ url_for('channel') }}" method="POST" id="form-custom">
                             <input type="text" class="new-channel" name="new-channel" maxlength="35" placeholder="Enter a name for the new channel">
-                            <button>Create channel</button>
+                            <button class="btn-channels">Create channel</button>
                             {% with errors = get_flashed_messages() %}
                             {% if errors %}
                             {% for error in errors %}
-                            <span class='error'>{{ error }}</span>
+                            <div class='error'>{{ error }}</div>
                             {% endfor %}
                             {% endif %}
                             {% endwith %}
@@ -40,46 +36,39 @@
                 <div class="row" id="row-secret">
                     <div class="col-md-12 text-md-center" id="col-secret">
                         <div class="container center_div">
-                            <form action="{{ url_for('channel') }}" method="POST" id="form-custom">
-                                <h1 class="title_secret">Create a secret channel:</h1>
-                                <label for="secret"><b>Password</b></label>
-                                <input type="text" class="new-channel" placeholder="Channel name" name="new-channel" required>
-                            
-                                <label for="psw"><b>Password</b></label>
-                                <input type="password" class="new-channel" placeholder="Enter Password" name="psw" required>
-                            
-                                <button>Create channel</button>
-                            </form>
+                            <button class="btn-channels">Secret channel</button>
                         </div> 
                     </div>
                 </div> 
         </div>
 
         <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-12 text-md-center" id="col-secret">
+
+
+            <h1 class="title_join">... or join an existing one!</h1>
+
+          <div class="grid-channels">
             {% if channels %}
-            <div class="grid-container">
-                <div class="grid-item1">
-                    <form action="{{ url_for('get_secret_channel') }}" method="POST">
-                        <h4>Enter a secret channel:</h4>
-                        <label for="secret_channel"><b>Channel name</b></label>
-                        <input type="text" id="none" name="secret_channel">
-                        <label for="psw"><b>Password</b></label>
-                        <input type="password" id="none" name="psw">
-                        <button>Submit</button>
-                    </form>
-                </div>
+                <ul>
                 {% for channel in channels %}
-                <div class="grid-item">
-                    <a href="{{ url_for('get_channel',channel_id=channel.id) }}">
+                <li>
+                    <a href="{{ url_for('get_channel',channel_id=channel.id) }}"  id="channel-get">
                         {{ channel.name }}
                     </a>
-                </div>
+                </li>
                 {% endfor %}
+                </ul>
             </div>
             {% endif %}
+
+                </div>
+            </div>
         </div>
  </div>
 
 
 </div>
 {% endblock %}
+

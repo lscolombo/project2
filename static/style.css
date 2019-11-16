@@ -5,7 +5,9 @@ html, body {
   
   body {
     align-items: center;
-    background: #59f442;
+    background: #cb134e;
+    background-image: url("/static/neon3.jpeg");
+    background-size: cover;
     display: flex;
     font-family: "Lucida Console", Monaco, monospace;
   }
@@ -32,11 +34,11 @@ html, body {
 
   button{
       background-color: white;
-      color: #59f442;
+      color: #cb134e;
   }
 
   button:hover{
-    background-color: #59f442;
+    background-color: #cb134e;
     color: white;
     transition: 0.3s ease;
   }
@@ -48,16 +50,18 @@ html, body {
 
 .col-md-4 {
   background-color: white;
-  color: #59f442;  
+  background-image: url("/static/neon6.jpeg");
+  color: #cb134e;  
 }
 
 .col-md-8 {
-  background-color: #59f442;
+  background-color: #cb134e;
+  background-image: url("/static/neon4.jpeg");
   color: white;
 }
 
 .row.custom:last-child{
-  height: 90%;
+  height: 100%;
 }
 
 
@@ -67,13 +71,13 @@ html, body {
 }
 
 .title_create, .title_join, .title_secret{
-  font-size: 34px;
+  font-size: 28px;
   font-weight: bold;
   margin-top: 50px;
 }
 
 .title_create{
-  color: #59f442;
+  color: #cb134e;
 }
 
 .title_join{
@@ -87,16 +91,16 @@ html, body {
 
 
 .new-channel{
-  border: 0.1px solid #59f442;
+  border: 0.1px solid #cb134e;
   font-size: 18px;
   height: 50px;
   width: 100%;
-  color: #59f442;
+  color: #cb134e;
   display: block;
 }
 
 .new-channel:focus{
-  border: 2px solid #59f442;
+  border: 2px solid #cb134e;
   transition:all 0.3 ease;
 }
 
@@ -108,9 +112,9 @@ html, body {
 
 
 .grid-item {
-  border: 10px solid #59f442;
+  border: 10px solid #cb134e;
   background-color: white ;
-  color: #59f442;
+  color: #cb134e;
   padding: 20px;
   font-size: 20px;
   text-align: center;
@@ -160,7 +164,30 @@ html, body {
   width:80% /* value of your choice which suits your alignment */
 }
 
-#form-custom{
-
+.btn-channels{
+  font-size: 20px;
 }
 
+#col-secret{
+  background-color:  linear-gradient(to right,#cb134e,#008499);
+}
+
+
+
+ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+}
+
+
+li{
+ /* display: inline-block;*/
+  flex: 1 0 26%; /* see note below */
+  white-space: nowrap;
+  height: 80px;
+  padding: 1%;
+  align-content: center;
+  vertical-align: middle;
+  display: block;
+}

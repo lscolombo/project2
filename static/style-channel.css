@@ -1,11 +1,12 @@
 body{
     font-family: "Lucida Console", Monaco, monospace;
+    background-image: url("/static/neon12.jpeg");
+    background-size: cover;
 }
 
 .container{max-width:1170px; margin:auto;}
 img{ max-width:100%;}
 .inbox_people {
-  background: #f8f8f8 none repeat scroll 0 0;
   float: left;
   overflow: hidden;
   width: 25%; border-right:1px solid #c4c4c4;
@@ -150,4 +151,17 @@ button:hover{
 
 li{
     list-style: none;
+}
+
+h3{
+  color: #cb134e;
+}
+
+#message{
+  background-color: black;
+  color: white;
+  padding: 1%;
+  border-color: white;
+  border-style: solid;
+  border-width: thin;
 }

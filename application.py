@@ -144,6 +144,10 @@ def message(data):
     print(channel.last_messages)
     emit("announce", msg, broadcast=True, include_self=True)
 
+@socketio.on("save channel")
+def save_channel(channel):
+    emit("save-channel", {'channel':channel})
+
 
 if __name__ == '__main__':
     socketio.run(app)

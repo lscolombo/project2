@@ -18,7 +18,10 @@
 </head>
 <body>
 <div class="container">
-<h3 class=" text-center">{{channel.name}} {{color}}</h3>
+    <div class="div-btn-header">
+        <a href="javascript:clearChannel();"><input type="button" id="btn-exit-rooom">Exit room</a>
+        <h3 class=" text-center">{{channel.name}}</h3>
+    </div>  
 <div class="messaging">
       <div class="inbox_msg">
         <div class="inbox_people">
@@ -66,3 +69,8 @@
     </div></div>
     </body>
     </html>
+
+
+    <script>
+    localStorage.setItem('channel', {{channel.id}});
+    </script> 

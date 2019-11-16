@@ -22,45 +22,48 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('#message').value = "";
             socket.emit('submit message',{'message': message, 'color': color});
       };
-
     });
 
     socket.on('announce', data => {
         displayMessage(data);
     });
 
-
-    function displayMessage(data){
-        const message = document.createElement('li');
-        message.style.color = data.color;
-
-        const timestamp = document.createElement('span');
-        timestamp.id = 'timestamp';
-        message.appendChild(timestamp);
-
-        const nickname = document.createElement('span');
-        nickname.id = 'nickname';
-        message.appendChild(nickname);
-
-        const content = document.createElement('span');
-        content.id = 'content';
-        message.appendChild(content);
-
-        timestamp.textContent = '[' + data.timestamp + '] ';
-        nickname.textContent = data.nickname;
-        content.textContent = ": " + data.message;
-
-        document.querySelector('#conversation').append(message);
-
-        updateScroll();
-    }
-
-    function updateScroll(){
-        var element = document.getElementById("mesgs");
-        element.scrollTop = element.scrollHeight;
-    }
-
+    socket.on('save-channel', data => {
+        saveChannel(data.channel);
+    });
 });
+
+
+function displayMessage(data){
+    const message = document.createElement('li');
+    message.style.color = data.color;
+
+    const timestamp = document.createElement('span');
+    timestamp.id = 'timestamp';
+    message.appendChild(timestamp);
+
+    const nickname = document.createElement('span');
+    nickname.id = 'nickname';
+    message.appendChild(nickname);
+
+    const content = document.createElement('span');
+    content.id = 'content';
+    message.appendChild(content);
+
+    timestamp.textContent = '[' + data.timestamp + '] ';
+    nickname.textContent = data.nickname;
+    content.textContent = ": " + data.message;
+
+    document.querySelector('#conversation').append(message);
+
+    updateScroll();
+}
+
+function updateScroll(){
+    var element = document.getElementById("mesgs");
+    element.scrollTop = element.scrollHeight;
+}
+
 
 
 
