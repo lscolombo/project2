@@ -27,7 +27,7 @@ class User:
     def __init__(self,nickname):
         self.nickname = nickname
         self.last_channel=None
-        self.color = "#{:06x}".format(random.randint(0, 0xFFFFFF))
+        self.color = "#{:06x}".format(random.randint(200, 0xFFFFFF))
     
     def set_last_channel(self,last_channel):
         self.last_channel = last_channel
