@@ -190,4 +190,30 @@ li{
   align-content: center;
   vertical-align: middle;
   display: block;
+  color: white;
+  font-weight: bold;
+  border: 1px solid transparent;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -border-radius: 10px;
+  border-radius: 10px;
+  margin: 10px;
+  background-image: linear-gradient(to bottom right, #008499, #cb134e);
+}
+
+li:hover{
+  -webkit-filter: brightness(150%);
+}
+
+a{
+  color:white;
+  display: block;
+  height: 100%;
+  width: 100%;
+  opacity: 1;
+}
+
+a:hover{
+  text-decoration: none;
+  color:white;
 }
