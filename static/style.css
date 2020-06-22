@@ -32,16 +32,17 @@ html, body {
       transition:all 0.3 ease;
   }
 
-  button{
+ button{
       background-color: white;
       color: #cb134e;
   }
 
-  button:hover{
+  ,button:hover{
     background-color: #cb134e;
     color: white;
     transition: 0.3s ease;
   }
+  
 
 .error{
     margin-top: 10px;
@@ -57,6 +58,7 @@ html, body {
 .col-md-8 {
   background-color: #cb134e;
   background-image: url("/static/neon4.jpeg");
+  background-repeat: round;
   color: white;
 }
 
@@ -78,6 +80,7 @@ html, body {
 
 .title_create{
   color: #cb134e;
+  margin-left: 40px;
 }
 
 .title_join{
@@ -97,6 +100,7 @@ html, body {
   width: 100%;
   color: #cb134e;
   display: block;
+  margin: 20px;
 }
 
 .new-channel:focus{
@@ -166,6 +170,7 @@ html, body {
 
 .btn-channels{
   font-size: 20px;
+  height: 50px;
 }
 
 #col-secret{

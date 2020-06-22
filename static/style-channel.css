@@ -4,6 +4,31 @@ body{
     background-size: cover;
 }
 
+  #btn-exit-room:focus{
+      border: 2px solid white;
+      transition:all 0.3 ease;
+  }
+
+  #btn-exit-room{
+    background-color: red;
+    color: white;
+    padding: 1%;
+    margin-top: 30px;
+    width: 20%;
+  }
+  
+  #btn-exit-room:hover{
+    background-color: #cb134e;
+    color: white;
+    transition: 0.3s ease;
+  } 
+
+  
+#users{
+    content: #05728f;
+    color: greenyellow;
+}
+
 .container{max-width:1170px; margin:auto;}
 img{ max-width:100%;}
 .inbox_people {
@@ -55,13 +80,13 @@ img{ max-width:100%;}
   width: 88%;
 }
 
-.chat_people{ overflow:hidden; clear:both;}
+.chat_people{ overflow:hidden; clear:both; color:white;}
 .chat_list {
   border-bottom: 1px solid #c4c4c4;
   margin: 0;
   padding: 18px 16px 10px;
 }
-.inbox_chat { height: 75%; overflow-y: scroll;}
+.inbox_chat { height: 75%; overflow-y: hidden;}
 
 .active_chat{ background:#ebebeb;}
 
@@ -97,6 +122,7 @@ img{ max-width:100%;}
   width: 75%;
   height: 75%;
   overflow-y: scroll;
+  overflow-wrap: break-word;
 }
 
  .sent_msg p {
